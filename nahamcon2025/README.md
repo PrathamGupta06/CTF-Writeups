@@ -1,9 +1,9 @@
 # NahamCon CTF 2025 Writeups
 
 This repository contains writeups for challenges from NahamCon CTF 2025.
-Rank Achieved: 25th
+Rank Achieved: 26th
 
-Some challenge writeups might not be complete in it.
+Some challenges are yet to be added.
 
 ## Challenge Categories
 
