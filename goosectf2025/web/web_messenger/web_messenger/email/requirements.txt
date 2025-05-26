@@ -1,0 +1,3 @@
+aiosmtpd
+Gunicorn
+flask

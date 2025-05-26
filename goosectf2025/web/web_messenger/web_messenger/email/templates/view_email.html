@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 15px;
+            text-align: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Email Details</h1>
+    </header>
+    <div class="container">
+        <p><strong>From:</strong> {{ email.from }}</p>
+        <p><strong>To:</strong> {{ email.to }}</p>
+        <p><strong>Time:</strong> {{ email.time }}</p>
+        <p><strong>Subject:</strong> {{ email.subject }}</p>
+        <p><strong>Content:</strong></p>
+        <pre>{{ email.body }}</pre>
+        <p><a href="{{ url_for('inbox') }}">Back to Inbox</a></p>
+    </div>
+</body>
+</html>

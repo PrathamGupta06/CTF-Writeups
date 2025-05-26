@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Soc Messenger</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .banner {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #0056b3;
+        }
+        .banner a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container {
+            background-color: #fff;
+            margin: 40px auto;
+            max-width: 600px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .flash {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            color: #fff;
+        }
+        .flash-success {
+            background-color: #28a745;
+        }
+        .flash-error {
+            background-color: #dc3545;
+        }
+        h1 {
+            color: #007BFF;
+        }
+        p {
+            line-height: 1.6;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <a href="/inbox">You can access your inbox at /inbox</a>
+    </div>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <h1>Welcome to Cyber Soc Messenger</h1>
+        
+        {% if session['username'] %}
+            <p>Hello, {{ session['username'] }}</p>
+            <a href="/logout"><button>Logout</button></a>
+            <a href="/app"><button>App</button></a>
+        {% else %}
+            <a href="/login"><button>Login</button></a>
+        {% endif %}
+    </div>
+</body>
+</html>
