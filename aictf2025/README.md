@@ -1,6 +1,8 @@
 # AICTF 2025 Writeups
 
-This repository contains writeups for challenges from the AICTF 2025 competition.
+[ctftime](https://ctftime.org/event/2778)
+
+There were really good challenges but unfortunately I only got about an hour of free time to solve the challenges.
 
 ## Challenges
 
