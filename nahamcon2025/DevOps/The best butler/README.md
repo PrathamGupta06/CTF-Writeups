@@ -11,7 +11,8 @@ We are provided with a unauthenticated jenkins dashboard:
 
 We can't really do much since it's unauthenticated.
 The jenkins version is very old: **Jenkins 2.332.2**
-After some research found out a CVE: CVE-2024-23897 which allows for Arbitrary File read. For this we need access to the jenkins-cli.jar.
+After some research found out a CVE: CVE-2024-23897 which allows for Arbitrary File read. 
+For this we need to first download the `jenkins-cli.jar`.
 
 Ran the following command: `java -jar jenkins-cli.jar -s http://challenge.nahamcon.com:port/ -webSocket help @/flag.txt`
 
