@@ -1,0 +1,1579 @@
+&&&&&&&&&&&&&&&&&&&&&&&&&&
+tHItAIt:IIt2IIuE
+------------------------------------------------------------------------------
+----------------------------------------------------------------------------
+L$(uVf9N uPf9N0uJf9N@uDf9NPu>f9N`u8f9Npu2
+uOf9F uIf9F0uCf9F@u=f9FPu7f9F`u1f9Fpu+
+uaf9q u[f9q0uUf9q@uOf9qPuIf9q`uCf9qpu=
+9] tH9]$u>9](u>
+(xup#xu`$xu =xu`%xu
+Software\Enterbrain\RGSS
+Software\Enterbrain\RGSS\RTP
+module RPG;class Map;def initialize(width, height);@tileset_id = 1;@width = width;@height = height;@autoplay_bgm = false;@bgm = RPG::AudioFile.new;@autoplay_bgs = false;@bgs = RPG::AudioFile.new('', 80);@encounter_list = [];@encounter_step = 30;@data = Table.new(width, height, 3);@events = {};end;attr_accessor :tileset_id;attr_accessor :width;attr_accessor :height;attr_accessor :autoplay_bgm;attr_accessor :bgm;attr_accessor :autoplay_bgs;attr_accessor :bgs;attr_accessor :encounter_list;attr_accessor :encounter_step;attr_accessor :data;attr_accessor :events;end;class MapInfo;def initialize;@name = '';@parent_id = 0;@order = 0;@expanded = false;@scroll_x = 0;@scroll_y = 0;end;attr_accessor :name;attr_accessor :parent_id;attr_accessor :order;attr_accessor :expanded;attr_accessor :scroll_x;attr_accessor :scroll_y;end;class Event;def initialize(x, y);@id = 0;@name = '';@x = x;@y = y;@pages = [RPG::Event::Page.new];end;attr_accessor :id;attr_accessor :name;attr_accessor :x;attr_accessor :y;attr_accessor :pages;end;class Event;class Page;def initialize;@condition = RPG::Event::Page::Condition.new;@graphic = RPG::Event::Page::Graphic.new;@move_type = 0;@move_speed = 3;@move_frequency = 3;@move_route = RPG::MoveRoute.new;@walk_anime = true;@step_anime = false;@direction_fix = false;@through = false;@always_on_top = false;@trigger = 0;@list = [RPG::EventCommand.new];end;attr_accessor :condition;attr_accessor :graphic;attr_accessor :move_type;attr_accessor :move_speed;attr_accessor :move_frequency;attr_accessor :move_route;attr_accessor :walk_anime;attr_accessor :step_anime;attr_accessor :direction_fix;attr_accessor :through;attr_accessor :always_on_top;attr_accessor :trigger;attr_accessor :list;end;end;class Event;class Page;class Condition;def initialize;@switch1_valid = false;@switch2_valid = false;@variable_valid = false;@self_switch_valid = false;@switch1_id = 1;@switch2_id = 1;@variable_id = 1;@variable_value = 0;@self_switch_ch = 'A';end;attr_accessor :switch1_valid;attr_accessor :switch2_valid;attr_accessor :variable_valid;attr_accessor :self_switch_valid;attr_accessor :switch1_id;attr_accessor :switch2_id;attr_accessor :variable_id;attr_accessor :variable_value;attr_accessor :self_switch_ch;end;end;end;class Event;class Page;class Graphic;def initialize;@tile_id = 0;@character_name = '';@character_hue = 0;@direction = 2;@pattern = 0;@opacity = 255;@blend_type = 0;end;attr_accessor :tile_id;attr_accessor :character_name;attr_accessor :character_hue;attr_accessor :direction;attr_accessor :pattern;attr_accessor :opacity;attr_accessor :blend_type;end;end;end;class EventCommand;def initialize(code = 0, indent = 0, parameters = []);@code = code;@indent = indent;@parameters = parameters;end;attr_accessor :code;attr_accessor :indent;attr_accessor :parameters;end;class MoveRoute;def initialize;@repeat = true;@skippable = false;@list = [RPG::MoveCommand.new];end;attr_accessor :repeat;attr_accessor :skippable;attr_accessor :list;end;class MoveCommand;def initialize(code = 0, parameters = []);@code = code;@parameters = parameters;end;attr_accessor :code;attr_accessor :parameters;end;class Actor;def initialize;@id = 0;@name = '';@class_id = 1;@initial_level = 1;@final_level = 99;@exp_basis = 30;@exp_inflation = 30;@character_name = '';@character_hue = 0;@battler_name = '';@battler_hue = 0;@parameters = Table.new(6,100);for i in 1..99;@parameters[0,i] = 500+i*50;@parameters[1,i] = 500+i*50;@parameters[2,i] = 50+i*5;@parameters[3,i] = 50+i*5;@parameters[4,i] = 50+i*5;@parameters[5,i] = 50+i*5;end;@weapon_id = 0;@armor1_id = 0;@armor2_id = 0;@armor3_id = 0;@armor4_id = 0;@weapon_fix = false;@armor1_fix = false;@armor2_fix = false;@armor3_fix = false;@armor4_fix = false;end;attr_accessor :id;attr_accessor :name;attr_accessor :class_id;attr_accessor :initial_level;attr_accessor :final_level;attr_accessor :exp_basis;attr_accessor :exp_inflation;attr_accessor :character_name;attr_accessor :character_hue;attr_accessor :battler_name;attr_accessor :battler_hue;attr_accessor :parameters;attr_accessor :weapon_id;attr_accessor :armor1_id;attr_accessor :armor2_id;attr_accessor :armor3_id;attr_accessor :armor4_id;attr_accessor :weapon_fix;attr_accessor :armor1_fix;attr_accessor :armor2_fix;attr_accessor :armor3_fix;attr_accessor :armor4_fix;end;class Class;def initialize;@id = 0;@name = '';@position = 0;@weapon_set = [];@armor_set = [];@element_ranks = Table.new(1);@state_ranks = Table.new(1);@learnings = [];end;attr_accessor :id;attr_accessor :name;attr_accessor :position;attr_accessor :weapon_set;attr_accessor :armor_set;attr_accessor :element_ranks;attr_accessor :state_ranks;attr_accessor :learnings;end;class Class;class Learning;def initialize;@level = 1;@skill_id = 1;end;attr_accessor :level;attr_accessor :skill_id;end;end;class Skill;def initialize;@id = 0;@name = '';@icon_name = '';@description = '';@scope = 0;@occasion = 1;@animation1_id = 0;@animation2_id = 0;@menu_se = RPG::AudioFile.new('', 80);@common_event_id = 0;@sp_cost = 0;@power = 0;@atk_f = 0;@eva_f = 0;@str_f = 0;@dex_f = 0;@agi_f = 0;@int_f = 100;@hit = 100;@pdef_f = 0;@mdef_f = 100;@variance = 15;@element_set = [];@plus_state_set = [];@minus_state_set = [];end;attr_accessor :id;attr_accessor :name;attr_accessor :icon_name;attr_accessor :description;attr_accessor :scope;attr_accessor :occasion;attr_accessor :animation1_id;attr_accessor :animation2_id;attr_accessor :menu_se;attr_accessor :common_event_id;attr_accessor :sp_cost;attr_accessor :power;attr_accessor :atk_f;attr_accessor :eva_f;attr_accessor :str_f;attr_accessor :dex_f;attr_accessor :agi_f;attr_accessor :int_f;attr_accessor :hit;attr_accessor :pdef_f;attr_accessor :mdef_f;attr_accessor :variance;attr_accessor :element_set;attr_accessor :plus_state_set;attr_accessor :minus_state_set;end;class Item;def initialize;@id = 0;@name = '';@icon_name = '';@description = '';@scope = 0;@occasion = 0;@animation1_id = 0;@animation2_id = 0;@menu_se = RPG::AudioFile.new('', 80);@common_event_id = 0;@price = 0;@consumable = true;@parameter_type = 0;@parameter_points = 0;@recover_hp_rate = 0;@recover_hp = 0;@recover_sp_rate = 0;@recover_sp = 0;@hit = 100;@pdef_f = 0;@mdef_f = 0;@variance = 0;@element_set = [];@plus_state_set = [];@minus_state_set = [];end;attr_accessor :id;attr_accessor :name;attr_accessor :icon_name;attr_accessor :description;attr_accessor :scope;attr_accessor :occasion;attr_accessor :animation1_id;attr_accessor :animation2_id;attr_accessor :menu_se;attr_accessor :common_event_id;attr_accessor :price;attr_accessor :consumable;attr_accessor :parameter_type;attr_accessor :parameter_points;attr_accessor :recover_hp_rate;attr_accessor :recover_hp;attr_accessor :recover_sp_rate;attr_accessor :recover_sp;attr_accessor :hit;attr_accessor :pdef_f;attr_accessor :mdef_f;attr_accessor :variance;attr_accessor :element_set;attr_accessor :plus_state_set;attr_accessor :minus_state_set;end;class Weapon;def initialize;@id = 0;@name = '';@icon_name = '';@description = '';@animation1_id = 0;@animation2_id = 0;@price = 0;@atk = 0;@pdef = 0;@mdef = 0;@str_plus = 0;@dex_plus = 0;@agi_plus = 0;@int_plus = 0;@element_set = [];@plus_state_set = [];@minus_state_set = [];end;attr_accessor :id;attr_accessor :name;attr_accessor :icon_name;attr_accessor :description;attr_accessor :animation1_id;attr_accessor :animation2_id;attr_accessor :price;attr_accessor :atk;attr_accessor :pdef;attr_accessor :mdef;attr_accessor :str_plus;attr_accessor :dex_plus;attr_accessor :agi_plus;attr_accessor :int_plus;attr_accessor :element_set;attr_accessor :plus_state_set;attr_accessor :minus_state_set;end;class Armor;def initialize;@id = 0;@name = '';@icon_name = '';@description = '';@kind = 0;@auto_state_id = 0;@price = 0;@pdef = 0;@mdef = 0;@eva = 0;@str_plus = 0;@dex_plus = 0;@agi_plus = 0;@int_plus = 0;@guard_element_set = [];@guard_state_set = [];end;attr_accessor :id;attr_accessor :name;attr_accessor :icon_name;attr_accessor :description;attr_accessor :kind;attr_accessor :auto_state_id;attr_accessor :price;attr_accessor :pdef;attr_accessor :mdef;attr_accessor :eva;attr_accessor :str_plus;attr_accessor :dex_plus;attr_accessor :agi_plus;attr_accessor :int_plus;attr_accessor :guard_element_set;attr_accessor :guard_state_set;end;class Enemy;def initialize;@id = 0;@name = '';@battler_name = '';@battler_hue = 0;@maxhp = 500;@maxsp = 500;@str = 50;@dex = 50;@agi = 50;@int = 50;@atk = 100;@pdef = 100;@mdef = 100;@eva = 0;@animation1_id = 0;@animation2_id = 0;@element_ranks = Table.new(1);@state_ranks = Table.new(1);@actions = [RPG::Enemy::Action.new];@exp = 0;@gold = 0;@item_id = 0;@weapon_id = 0;@armor_id = 0;@treasure_prob = 100;end;attr_accessor :id;attr_accessor :name;attr_accessor :battler_name;attr_accessor :battler_hue;attr_accessor :maxhp;attr_accessor :maxsp;attr_accessor :str;attr_accessor :dex;attr_accessor :agi;attr_accessor :int;attr_accessor :atk;attr_accessor :pdef;attr_accessor :mdef;attr_accessor :eva;attr_accessor :animation1_id;attr_accessor :animation2_id;attr_accessor :element_ranks;attr_accessor :state_ranks;attr_accessor :actions;attr_accessor :exp;attr_accessor :gold;attr_accessor :item_id;attr_accessor :weapon_id;attr_accessor :armor_id;attr_accessor :treasure_prob;end;class Enemy;class Action;def initialize;@kind = 0;@basic = 0;@skill_id = 1;@condition_turn_a = 0;@condition_turn_b = 1;@condition_hp = 100;@condition_level = 1;@condition_switch_id = 0;@rating = 5;end;attr_accessor :kind;attr_accessor :basic;attr_accessor :skill_id;attr_accessor :condition_turn_a;attr_accessor :condition_turn_b;attr_accessor :condition_hp;attr_accessor :condition_level;attr_accessor :condition_switch_id;attr_accessor :rating;end;end;class Troop;def initialize;@id = 0;@name = '';@members = [];@pages = [RPG::Troop::Page.new];end;attr_accessor :id;attr_accessor :name;attr_accessor :members;attr_accessor :pages;end;class Troop;class Member;def initialize;@enemy_id = 1;@x = 0;@y = 0;@hidden = false;@immortal = false;end;attr_accessor :enemy_id;attr_accessor :x;attr_accessor :y;attr_accessor :hidden;attr_accessor :immortal;end;end;class Troop;class Page;def initialize;@condition = RPG::Troop::Page::Condition.new;@span = 0;@list = [RPG::EventCommand.new];end;attr_accessor :condition;attr_accessor :span;attr_accessor :list;end;end;class Troop;class Page;class Condition;def initialize;@turn_valid = false;@enemy_valid = false;@actor_valid = false;@switch_valid = false;@turn_a = 0;@turn_b = 0;@enemy_index = 0;@enemy_hp = 50;@actor_id = 1;@actor_hp = 50;@switch_id = 1;end;attr_accessor :turn_valid;attr_accessor :enemy_valid;attr_accessor :actor_valid;attr_accessor :switch_valid;attr_accessor :turn_a;attr_accessor :turn_b;attr_accessor :enemy_index;attr_accessor :enemy_hp;attr_accessor :actor_id;attr_accessor :actor_hp;attr_accessor :switch_id;end;end;end;class State;def initialize;@id = 0;@name = '';@animation_id = 0;@restriction = 0;@nonresistance = false;@zero_hp = false;@cant_get_exp = false;@cant_evade = false;@slip_damage = false;@rating = 5;@hit_rate = 100;@maxhp_rate = 100;@maxsp_rate = 100;@str_rate = 100;@dex_rate = 100;@agi_rate = 100;@int_rate = 100;@atk_rate = 100;@pdef_rate = 100;@mdef_rate = 100;@eva = 0;@battle_only = true;@hold_turn = 0;@auto_release_prob = 0;@shock_release_prob = 0;@guard_element_set = [];@plus_state_set = [];@minus_state_set = [];end;attr_accessor :id;attr_accessor :name;attr_accessor :animation_id;attr_accessor :restriction;attr_accessor :nonresistance;attr_accessor :zero_hp;attr_accessor :cant_get_exp;attr_accessor :cant_evade;attr_accessor :slip_damage;attr_accessor :rating;attr_accessor :hit_rate;attr_accessor :maxhp_rate;attr_accessor :maxsp_rate;attr_accessor :str_rate;attr_accessor :dex_rate;attr_accessor :agi_rate;attr_accessor :int_rate;attr_accessor :atk_rate;attr_accessor :pdef_rate;attr_accessor :mdef_rate;attr_accessor :eva;attr_accessor :battle_only;attr_accessor :hold_turn;attr_accessor :auto_release_prob;attr_accessor :shock_release_prob;attr_accessor :guard_element_set;attr_accessor :plus_state_set;attr_accessor :minus_state_set;end;class Animation;def initialize;@id = 0;@name = '';@animation_name = '';@animation_hue = 0;@position = 1;@frame_max = 1;@frames = [RPG::Animation::Frame.new];@timings = [];end;attr_accessor :id;attr_accessor :name;attr_accessor :animation_name;attr_accessor :animation_hue;attr_accessor :position;attr_accessor :frame_max;attr_accessor :frames;attr_accessor :timings;end;class Animation;class Frame;def initialize;@cell_max = 0;@cell_data = Table.new(0, 0);end;attr_accessor :cell_max;attr_accessor :cell_data;end;end;class Animation;class Timing;def initialize;@frame = 0;@se = RPG::AudioFile.new('', 80);@flash_scope = 0;@flash_color = Color.new(255,255,255,255);@flash_duration = 5;@condition = 0;end;attr_accessor :frame;attr_accessor :se;attr_accessor :flash_scope;attr_accessor :flash_color;attr_accessor :flash_duration;attr_accessor :condition;end;end;class Tileset;def initialize;@id = 0;@name = '';@tileset_name = '';@autotile_names = ['']*7;@panorama_name = '';@panorama_hue = 0;@fog_name = '';@fog_hue = 0;@fog_opacity = 64;@fog_blend_type = 0;@fog_zoom = 200;@fog_sx = 0;@fog_sy = 0;@battleback_name = '';@passages = Table.new(384);@priorities = Table.new(384);@priorities[0] = 5;@terrain_tags = Table.new(384);end;attr_accessor :id;attr_accessor :name;attr_accessor :tileset_name;attr_accessor :autotile_names;attr_accessor :panorama_name;attr_accessor :panorama_hue;attr_accessor :fog_name;attr_accessor :fog_hue;attr_accessor :fog_opacity;attr_accessor :fog_blend_type;attr_accessor :fog_zoom;attr_accessor :fog_sx;attr_accessor :fog_sy;attr_accessor :battleback_name;attr_accessor :passages;attr_accessor :priorities;attr_accessor :terrain_tags;end;class CommonEvent;def initialize;@id = 0;@name = '';@trigger = 0;@switch_id = 1;@list = [RPG::EventCommand.new];end;attr_accessor :id;attr_accessor :name;attr_accessor :trigger;attr_accessor :switch_id;attr_accessor :list;end;class System;def initialize;@magic_number = 0;@party_members = [1];@elements = [nil, ''];@switches = [nil, ''];@variables = [nil, ''];@windowskin_name = '';@title_name = '';@gameover_name = '';@battle_transition = '';@title_bgm = RPG::AudioFile.new;@battle_bgm = RPG::AudioFile.new;@battle_end_me = RPG::AudioFile.new;@gameover_me = RPG::AudioFile.new;@cursor_se = RPG::AudioFile.new('', 80);@decision_se = RPG::AudioFile.new('', 80);@cancel_se = RPG::AudioFile.new('', 80);@buzzer_se = RPG::AudioFile.new('', 80);@equip_se = RPG::AudioFile.new('', 80);@shop_se = RPG::AudioFile.new('', 80);@save_se = RPG::AudioFile.new('', 80);@load_se = RPG::AudioFile.new('', 80);@battle_start_se = RPG::AudioFile.new('', 80);@escape_se = RPG::AudioFile.new('', 80);@actor_collapse_se = RPG::AudioFile.new('', 80);@enemy_collapse_se = RPG::AudioFile.new('', 80);@words = RPG::System::Words.new;@test_battlers = [];@test_troop_id = 1;@start_map_id = 1;@start_x = 0;@start_y = 0;@battleback_name = '';@battler_name = '';@battler_hue = 0;@edit_map_id = 1;end;attr_accessor :magic_number;attr_accessor :party_members;attr_accessor :elements;attr_accessor :switches;attr_accessor :variables;attr_accessor :windowskin_name;attr_accessor :title_name;attr_accessor :gameover_name;attr_accessor :battle_transition;attr_accessor :title_bgm;attr_accessor :battle_bgm;attr_accessor :battle_end_me;attr_accessor :gameover_me;attr_accessor :cursor_se;attr_accessor :decision_se;attr_accessor :cancel_se;attr_accessor :buzzer_se;attr_accessor :equip_se;attr_accessor :shop_se;attr_accessor :save_se;attr_accessor :load_se;attr_accessor :battle_start_se;attr_accessor :escape_se;attr_accessor :actor_collapse_se;attr_accessor :enemy_collapse_se;attr_accessor :words;attr_accessor :test_battlers;attr_accessor :test_troop_id;attr_accessor :start_map_id;attr_accessor :start_x;attr_accessor :start_y;attr_accessor :battleback_name;attr_accessor :battler_name;attr_accessor :battler_hue;attr_accessor :edit_map_id;end;class System;class Words;def initialize;@gold = '';@hp = '';@sp = '';@str = '';@dex = '';@agi = '';@int = '';@atk = '';@pdef = '';@mdef = '';@weapon = '';@armor1 = '';@armor2 = '';@armor3 = '';@armor4 = '';@attack = '';@skill = '';@guard = '';@item = '';@equip = '';end;attr_accessor :gold;attr_accessor :hp;attr_accessor :sp;attr_accessor :str;attr_accessor :dex;attr_accessor :agi;attr_accessor :int;attr_accessor :atk;attr_accessor :pdef;attr_accessor :mdef;attr_accessor :weapon;attr_accessor :armor1;attr_accessor :armor2;attr_accessor :armor3;attr_accessor :armor4;attr_accessor :attack;attr_accessor :skill;attr_accessor :guard;attr_accessor :item;attr_accessor :equip;end;end;class System;class TestBattler;def initialize;@actor_id = 1;@level = 1;@weapon_id = 0;@armor1_id = 0;@armor2_id = 0;@armor3_id = 0;@armor4_id = 0;end;attr_accessor :actor_id;attr_accessor :level;attr_accessor :weapon_id;attr_accessor :armor1_id;attr_accessor :armor2_id;attr_accessor :armor3_id;attr_accessor :armor4_id;end;end;class AudioFile;def initialize(name = '', volume = 100, pitch = 100);@name = name;@volume = volume;@pitch = pitch;end;attr_accessor :name;attr_accessor :volume;attr_accessor :pitch;end;end;
+module RPG;module Cache;@cache = {};def self.load_bitmap(folder_name, filename, hue = 0);path = folder_name + filename;if not @cache.include?(path) or @cache[path].disposed?;if filename != '';@cache[path] = Bitmap.new(path);else;@cache[path] = Bitmap.new(32, 32);end;end;if hue == 0;@cache[path];else;key = [path, hue];if not @cache.include?(key) or @cache[key].disposed?;@cache[key] = @cache[path].clone;@cache[key].hue_change(hue);end;@cache[key];end;end;def self.animation(filename, hue);self.load_bitmap('Graphics/Animations/', filename, hue);end;def self.autotile(filename);self.load_bitmap('Graphics/Autotiles/', filename);end;def self.battleback(filename);self.load_bitmap('Graphics/Battlebacks/', filename);end;def self.battler(filename, hue);self.load_bitmap('Graphics/Battlers/', filename, hue);end;def self.character(filename, hue);self.load_bitmap('Graphics/Characters/', filename, hue);end;def self.fog(filename, hue);self.load_bitmap('Graphics/Fogs/', filename, hue);end;def self.gameover(filename);self.load_bitmap('Graphics/Gameovers/', filename);end;def self.icon(filename);self.load_bitmap('Graphics/Icons/', filename);end;def self.panorama(filename, hue);self.load_bitmap('Graphics/Panoramas/', filename, hue);end;def self.picture(filename);self.load_bitmap('Graphics/Pictures/', filename);end;def self.tileset(filename);self.load_bitmap('Graphics/Tilesets/', filename);end;def self.title(filename);self.load_bitmap('Graphics/Titles/', filename);end;def self.windowskin(filename);self.load_bitmap('Graphics/Windowskins/', filename);end;def self.tile(filename, tile_id, hue);key = [filename, tile_id, hue];if not @cache.include?(key) or @cache[key].disposed?;@cache[key] = Bitmap.new(32, 32);x = (tile_id - 384) % 8 * 32;y = (tile_id - 384) / 8 * 32;rect = Rect.new(x, y, 32, 32);@cache[key].blt(0, 0, self.tileset(filename), rect);@cache[key].hue_change(hue);end;@cache[key];end;def self.clear;@cache = {};GC.start;end;end;end;module RPG;class Sprite < ::Sprite;@@_animations = [];@@_reference_count = {};def initialize(viewport = nil);super(viewport);@_whiten_duration = 0;@_appear_duration = 0;@_escape_duration = 0;@_collapse_duration = 0;@_damage_duration = 0;@_animation_duration = 0;@_blink = false;end;def dispose;dispose_damage;dispose_animation;dispose_loop_animation;super;end;def whiten;self.blend_type = 0;self.color.set(255, 255, 255, 128);self.opacity = 255;@_whiten_duration = 16;@_appear_duration = 0;@_escape_duration = 0;@_collapse_duration = 0;end;def appear;self.blend_type = 0;self.color.set(0, 0, 0, 0);self.opacity = 0;@_appear_duration = 16;@_whiten_duration = 0;@_escape_duration = 0;@_collapse_duration = 0;end;def escape;self.blend_type = 0;self.color.set(0, 0, 0, 0);self.opacity = 255;@_escape_duration = 32;@_whiten_duration = 0;@_appear_duration = 0;@_collapse_duration = 0;end;def collapse;self.blend_type = 1;self.color.set(255, 64, 64, 255);self.opacity = 255;@_collapse_duration = 48;@_whiten_duration = 0;@_appear_duration = 0;@_escape_duration = 0;end;def damage(value, critical);dispose_damage;if value.is_a?(Numeric);damage_string = value.abs.to_s;else;damage_string = value.to_s;end;bitmap = Bitmap.new(160, 48);bitmap.font.name = 'Arial Black';bitmap.font.size = 32;bitmap.font.color.set(0, 0, 0);bitmap.draw_text(-1, 12-1, 160, 36, damage_string, 1);bitmap.draw_text(+1, 12-1, 160, 36, damage_string, 1);bitmap.draw_text(-1, 12+1, 160, 36, damage_string, 1);bitmap.draw_text(+1, 12+1, 160, 36, damage_string, 1);if value.is_a?(Numeric) and value < 0;bitmap.font.color.set(176, 255, 144);else;bitmap.font.color.set(255, 255, 255);end;bitmap.draw_text(0, 12, 160, 36, damage_string, 1);if critical;bitmap.font.size = 20;bitmap.font.color.set(0, 0, 0);bitmap.draw_text(-1, -1, 160, 20, 'CRITICAL', 1);bitmap.draw_text(+1, -1, 160, 20, 'CRITICAL', 1);bitmap.draw_text(-1, +1, 160, 20, 'CRITICAL', 1);bitmap.draw_text(+1, +1, 160, 20, 'CRITICAL', 1);bitmap.font.color.set(255, 255, 255);bitmap.draw_text(0, 0, 160, 20, 'CRITICAL', 1);end;@_damage_sprite = ::Sprite.new(self.viewport);@_damage_sprite.bitmap = bitmap;@_damage_sprite.ox = 80;@_damage_sprite.oy = 20;@_damage_sprite.x = self.x;@_damage_sprite.y = self.y - self.oy / 2;@_damage_sprite.z = 3000;@_damage_duration = 40;end;def animation(animation, hit);dispose_animation;@_animation = animation;return if @_animation == nil;@_animation_hit = hit;@_animation_duration = @_animation.frame_max;animation_name = @_animation.animation_name;animation_hue = @_animation.animation_hue;bitmap = RPG::Cache.animation(animation_name, animation_hue);if @@_reference_count.include?(bitmap);@@_reference_count[bitmap] += 1;else;@@_reference_count[bitmap] = 1;end;@_animation_sprites = [];if @_animation.position != 3 or not @@_animations.include?(animation);for i in 0..15;sprite = ::Sprite.new(self.viewport);sprite.bitmap = bitmap;sprite.visible = false;@_animation_sprites.push(sprite);end;unless @@_animations.include?(animation);@@_animations.push(animation);end;end;update_animation;end;def loop_animation(animation);return if animation == @_loop_animation;dispose_loop_animation;@_loop_animation = animation;return if @_loop_animation == nil;@_loop_animation_index = 0;animation_name = @_loop_animation.animation_name;animation_hue = @_loop_animation.animation_hue;bitmap = RPG::Cache.animation(animation_name, animation_hue);if @@_reference_count.include?(bitmap);@@_reference_count[bitmap] += 1;else;@@_reference_count[bitmap] = 1;end;@_loop_animation_sprites = [];for i in 0..15;sprite = ::Sprite.new(self.viewport);sprite.bitmap = bitmap;sprite.visible = false;@_loop_animation_sprites.push(sprite);end;update_loop_animation;end;def dispose_damage;if @_damage_sprite != nil;@_damage_sprite.bitmap.dispose;@_damage_sprite.dispose;@_damage_sprite = nil;@_damage_duration = 0;end;end;def dispose_animation;if @_animation_sprites != nil;sprite = @_animation_sprites[0];if sprite != nil;@@_reference_count[sprite.bitmap] -= 1;if @@_reference_count[sprite.bitmap] == 0;sprite.bitmap.dispose;end;end;for sprite in @_animation_sprites;sprite.dispose;end;@_animation_sprites = nil;@_animation = nil;end;end;def dispose_loop_animation;if @_loop_animation_sprites != nil;sprite = @_loop_animation_sprites[0];if sprite != nil;@@_reference_count[sprite.bitmap] -= 1;if @@_reference_count[sprite.bitmap] == 0;sprite.bitmap.dispose;end;end;for sprite in @_loop_animation_sprites;sprite.dispose;end;@_loop_animation_sprites = nil;@_loop_animation = nil;end;end;def blink_on;unless @_blink;@_blink = true;@_blink_count = 0;end;end;def blink_off;if @_blink;@_blink = false;self.color.set(0, 0, 0, 0);end;end;def blink?;@_blink;end;def effect?;@_whiten_duration > 0 or@_appear_duration > 0 or@_escape_duration > 0 or@_collapse_duration > 0 or@_damage_duration > 0 or@_animation_duration > 0;end;def update;super;if @_whiten_duration > 0;@_whiten_duration -= 1;self.color.alpha = 128 - (16 - @_whiten_duration) * 10;end;if @_appear_duration > 0;@_appear_duration -= 1;self.opacity = (16 - @_appear_duration) * 16;end;if @_escape_duration > 0;@_escape_duration -= 1;self.opacity = 256 - (32 - @_escape_duration) * 10;end;if @_collapse_duration > 0;@_collapse_duration -= 1;self.opacity = 256 - (48 - @_collapse_duration) * 6;end;if @_damage_duration > 0;@_damage_duration -= 1;case @_damage_duration;when 38..39;@_damage_sprite.y -= 4;when 36..37;@_damage_sprite.y -= 2;when 34..35;@_damage_sprite.y += 2;when 28..33;@_damage_sprite.y += 4;end;@_damage_sprite.opacity = 256 - (12 - @_damage_duration) * 32;if @_damage_duration == 0;dispose_damage;end;end;if @_animation != nil and (Graphics.frame_count % 2 == 0);@_animation_duration -= 1;update_animation;end;if @_loop_animation != nil and (Graphics.frame_count % 2 == 0);update_loop_animation;@_loop_animation_index += 1;@_loop_animation_index %= @_loop_animation.frame_max;end;if @_blink;@_blink_count = (@_blink_count + 1) % 32;if @_blink_count < 16;alpha = (16 - @_blink_count) * 6;else;alpha = (@_blink_count - 16) * 6;end;self.color.set(255, 255, 255, alpha);end;@@_animations.clear;end;def update_animation;if @_animation_duration > 0;frame_index = @_animation.frame_max - @_animation_duration;cell_data = @_animation.frames[frame_index].cell_data;position = @_animation.position;animation_set_sprites(@_animation_sprites, cell_data, position);for timing in @_animation.timings;if timing.frame == frame_index;animation_process_timing(timing, @_animation_hit);end;end;else;dispose_animation;end;end;def update_loop_animation;frame_index = @_loop_animation_index;cell_data = @_loop_animation.frames[frame_index].cell_data;position = @_loop_animation.position;animation_set_sprites(@_loop_animation_sprites, cell_data, position);for timing in @_loop_animation.timings;if timing.frame == frame_index;animation_process_timing(timing, true);end;end;end;def animation_set_sprites(sprites, cell_data, position);for i in 0..15;sprite = sprites[i];pattern = cell_data[i, 0];if sprite == nil or pattern == nil or pattern == -1;sprite.visible = false if sprite != nil;next;end;sprite.visible = true;sprite.src_rect.set(pattern % 5 * 192, pattern / 5 * 192, 192, 192);if position == 3;if self.viewport != nil;sprite.x = self.viewport.rect.width / 2;sprite.y = self.viewport.rect.height - 160;else;sprite.x = 320;sprite.y = 240;end;else;sprite.x = self.x - self.ox + self.src_rect.width / 2;sprite.y = self.y - self.oy + self.src_rect.height / 2;sprite.y -= self.src_rect.height / 4 if position == 0;sprite.y += self.src_rect.height / 4 if position == 2;end;sprite.x += cell_data[i, 1];sprite.y += cell_data[i, 2];sprite.z = 2000;sprite.ox = 96;sprite.oy = 96;sprite.zoom_x = cell_data[i, 3] / 100.0;sprite.zoom_y = cell_data[i, 3] / 100.0;sprite.angle = cell_data[i, 4];sprite.mirror = (cell_data[i, 5] == 1);sprite.opacity = cell_data[i, 6] * self.opacity / 255.0;sprite.blend_type = cell_data[i, 7];end;end;def animation_process_timing(timing, hit);if (timing.condition == 0) or(timing.condition == 1 and hit == true) or(timing.condition == 2 and hit == false);if timing.se.name != '';se = timing.se;Audio.se_play('Audio/SE/' + se.name, se.volume, se.pitch);end;case timing.flash_scope;when 1;self.flash(timing.flash_color, timing.flash_duration * 2);when 2;if self.viewport != nil;self.viewport.flash(timing.flash_color, timing.flash_duration * 2);end;when 3;self.flash(nil, timing.flash_duration * 2);end;end;end;def x=(x);sx = x - self.x;if sx != 0;if @_animation_sprites != nil;for i in 0..15;@_animation_sprites[i].x += sx;end;end;if @_loop_animation_sprites != nil;for i in 0..15;@_loop_animation_sprites[i].x += sx;end;end;end;super;end;def y=(y);sy = y - self.y;if sy != 0;if @_animation_sprites != nil;for i in 0..15;@_animation_sprites[i].y += sy;end;end;if @_loop_animation_sprites != nil;for i in 0..15;@_loop_animation_sprites[i].y += sy;end;end;end;super;end;end;end;module RPG;class Weather;def initialize(viewport = nil);@type = 0;@max = 0;@ox = 0;@oy = 0;color1 = Color.new(255, 255, 255, 255);color2 = Color.new(255, 255, 255, 128);@rain_bitmap = Bitmap.new(7, 56);for i in 0..6;@rain_bitmap.fill_rect(6-i, i*8, 1, 8, color1);end;@storm_bitmap = Bitmap.new(34, 64);for i in 0..31;@storm_bitmap.fill_rect(33-i, i*2, 1, 2, color2);@storm_bitmap.fill_rect(32-i, i*2, 1, 2, color1);@storm_bitmap.fill_rect(31-i, i*2, 1, 2, color2);end;@snow_bitmap = Bitmap.new(6, 6);@snow_bitmap.fill_rect(0, 1, 6, 4, color2);@snow_bitmap.fill_rect(1, 0, 4, 6, color2);@snow_bitmap.fill_rect(1, 2, 4, 2, color1);@snow_bitmap.fill_rect(2, 1, 2, 4, color1);@sprites = [];for i in 1..40;sprite = Sprite.new(viewport);sprite.z = 1000;sprite.visible = false;sprite.opacity = 0;@sprites.push(sprite);end;end;def dispose;for sprite in @sprites;sprite.dispose;end;@rain_bitmap.dispose;@storm_bitmap.dispose;@snow_bitmap.dispose;end;def type=(type);return if @type == type;@type = type;case @type;when 1;bitmap = @rain_bitmap;when 2;bitmap = @storm_bitmap;when 3;bitmap = @snow_bitmap;else;bitmap = nil;end;for i in 1..40;sprite = @sprites[i];if sprite != nil;sprite.visible = (i <= @max);sprite.bitmap = bitmap;end;end;end;def ox=(ox);return if @ox == ox;@ox = ox;for sprite in @sprites;sprite.ox = @ox;end;end;def oy=(oy);return if @oy == oy;@oy = oy;for sprite in @sprites;sprite.oy = @oy;end;end;def max=(max);return if @max == max;@max = [[max, 0].max, 40].min;for i in 1..40;sprite = @sprites[i];if sprite != nil;sprite.visible = (i <= @max);end;end;end;def update;return if @type == 0;for i in 1..@max;sprite = @sprites[i];if sprite == nil;break;end;if @type == 1;sprite.x -= 2;sprite.y += 16;sprite.opacity -= 8;end;if @type == 2;sprite.x -= 8;sprite.y += 16;sprite.opacity -= 12;end;if @type == 3;sprite.x -= 2;sprite.y += 8;sprite.opacity -= 8;end;x = sprite.x - @ox;y = sprite.y - @oy;if sprite.opacity < 64 or x < -50 or x > 750 or y < -300 or y > 500;sprite.x = rand(800) - 50 + @ox;sprite.y = rand(800) - 200 + @oy;sprite.opacity = 255;end;end;end;attr_reader :type;attr_reader :max;attr_reader :ox;attr_reader :oy;end;end;
+disposed bitmap
+failed to create bitmap
+wrong argument class
+list<T> too long
+initialize_copy
+o@(%f, %f, %f, %f)
+@@default_color
+@@default_italic
+default_italic=
+wrong # of arguments (%d for %d)
+bad value for %s
+can't convert %s into %s
+$:.clear;$KCODE='U'
+$!.to_s.split("
+")[1].sub(/.*?:/,'')
+$@[0].to_s.sub(/:.*/,'')
+$@[0].to_s.sub(/.*?:/,'').to_i
+$RGSS_SCRIPTS[$@[0].to_s.sub(/Section/,'').sub(/:.*/,'').to_i][1]
+$@[0].to_s.sub(/Section/,'').sub(/:.*/,'').to_i
+$!.to_s.sub(/Section[0-9]+:[0-9]+:in `[^']*'/, "")
+$!.to_s.sub(/\(eval\):[0-9]+:in `[^']*'/, "")
+$@[0] = $!.to_s.clone
+$@.shift while $@[0].to_s[0..5] == '(eval)' and $@.size > 1
+vector<T> too long
+Graphics._reset;Input.update;Audio.me_stop;Audio.se_stop;Audio.bgm_stop;Audio.bgs_stop;GC.start;
+$RGSS_SCRIPTS[%d][3]
+$RGSS_SCRIPTS = load_data(scripts_fname);$RGSS_SCRIPTS.each { |s| s[3,0] = Zlib::Inflate.inflate(s[2]) };$RGSS_SCRIPTS.size
+scripts_fname = ''
+Graphics._reset
+(%d, %d, %d, %d)
+disposed sprite
+disposed tilemap
+TilemapAutotiles
+disposed viewport
+disposed window
+contents_opacity=
+contents_opacity
+GetGlyphOutlineW
+>Insecure: can't modify array
+can't modify array during iteration
+array size too big
+negative array size (or size too big)
+negative number of arguments
+index %ld out of array
+Symbol as array index
+block supersedes default value argument
+Array#%s is deprecated; use Array#values_at
+negative length (%ld)
+wrong number of arguments (%d for 2)
+Symbol as subarray length
+wrong number of arguments (at least 1)
+invalid inspect_tbl value
+wrong number arguments (%d for 0)
+element size differ (%d should be %d)
+tried to flatten recursive array
+negative array size
+given block not used
+argument too big
+negative argument
+__inspect_key__
+0123456789abcdefghijklmnopqrstuvwxyz
+illegal radix %d
+bignum too big to convert into `%s'
+bignum out of range of unsigned long
+bignum too big to convert into `int'
+Bignum out of Float range
+in a**b, b may be too big
+Can't coerce %s to Bignum
+can't make subclass of virtual class
+can't make subclass of Class
+superclass must be a Class (%s given)
+no super class for `%s', Object assumed
+%s is already defined
+%s is not a class
+no super class for `%s::%s', Object assumed
+%s is not a module
+%s::%s is not a module
+cyclic include detected
+can't define singleton
+unknown immediate %ld
+bad scan arg format: %s
+wrong number of arguments(%d for %d)
+wrong number of arguments (%d for %d)
+already initialized class
+comparison of %s with %s failed
+closed directory
+HOME/LOGDIR not set
+conflicting chdir during another chdir block
+filename too long
+	Directory "%.*s"
+	Directory "%s"
+openpath: pathname too long (ignored)
+/usr/local/bin;/usr/ucb;/usr/bin;/bin;.
+each_with_index
+erf.c:%d:p_gamma() could not converge.
+erf.c:%d:q_gamma() could not converge.
+@backtrace must be Array of String
+ruby %s (%s) [%s]
+The %s() function is unimplemented on this machine
+rb_sys_fail(%s) - errno == 0
+can't modify frozen %s
+ESOCKTNOSUPPORT
+EPROTONOSUPPORT
+wrong argument type %s (expected %s)
+unknown type 0x%x
+undef leaked to the Ruby space
+invalid value for %s: %s
+invalid instance type
+SystemCallError
+NotImplementedError
+SignalException
+Insecure operation at level %d
+Insecure operation `%s' at level %d
+Insecure operation: -r
+Insecure operation - %s
+wrong argument type %s (expected String)
+undefined method `%s' for %s `%s'
+defining %s.allocate is deprecated; use rb_define_alloc_func()
+Insecure: can't define method
+argument needs to be symbol or string
+private attribute?
+attribute accessor as module_function
+	 ... %ld levels...
+: unhandled exception
+retry outside of rescue clause
+unexpected redo
+unexpected next
+unexpected break
+unexpected return
+undefined superclass `%s'
+class variable access from toplevel singleton method
+undefined method `%s' for%s `%s'
+undefining `%s' may cause serious problem
+Insecure: can't undef `%s'
+`to_a' did not return Array
+%s is not a class/module
+class path missing
+wrong number of arguments
+exception object expected
+exception class/object expected
+return jump can't across threads
+bug in variable assignment
+declaring singleton class variable
+unexpected local variable assignment
+assigning void value
+class or module required for rescue clause
+too many arguments(%d)
+super: no superclass method `%s'
+%s is not included in %s
+calling `super' from `%s' is prohibited
+negative level(%d)
+No such file to load -- %s
+Insecure: can't change method visibility
+undefined method `%s'; can't happen
+module_function must be called for modules
+assigning non-exception to $!
+#<%s:0x%.*lx@%s:%d>
+you cannot call unbound method; bind first
+bind argument must be an instance of %s
+singleton method called for a different object
+tried to downgrade safe level from %d to %d
+>wrong argument type %s (expected Thread)
+unsaved context
+Thread(0x%lx): deadlock
+uninitialized thread - check `%s#initialize'
+Insecure: thread locals
+Insecure: can't modify thread locals
+continuation called across threads
+can't move from the enclosed thread group
+can't move from the frozen thread group
+can't move to the enclosed thread group
+can't move to the frozen thread group
+uncaught throw `%s' in thread 0x%lx
+uncaught throw `%s'
+Unknown longjmp status %d
+: unexpected throw
+%s:%d: uncaught throw
+: retry outside of rescue clause
+: unexpected redo
+: unexpected break
+: unexpected next
+: unexpected return
+instance-variable
+global-variable
+local-variable(in-block)
+trace_func needs to be Proc
+wrong number of arguments (%ld for %ld)
+tried to create Proc object without a block
+return from proc-closure
+Insecure: tainted block value
+wrong argument type %s (expected Proc)
+wrong number of arguments(%d for 1)
+wrong argument type (expected Proc/Method)
+wrong argument type %s (expected Proc/Method)
+called without a block
+unknown node type %d
+no virtual class for %s
+Insecure: can't extend object
+no outer class/module
+no class to make alias
+no class to undef method
+can't define singleton method "%s" for %s
+redefining method prohibited
+Insecure: can't define singleton method
+no class/module to add method
+odd number list for Hash
+unexpected back-ref
+unexpected block argument
+no class/module to define class variable
+no class/module to define constant
+super called outside of method
+superclass method `%s' disabled
+unexpected local variable
+extending module prohibited
+extending class prohibited
+method redefined; discarding old %s
+redefining `%s' may cause serious problem
+redefining Object#initialize may cause infinite loop
+wrong argument type %s (expected Proc/Binding)
+Insecure: can't modify trusted binding
+deadlock 0x%lx: %s:
+9Y>)Fcross-thread violation on rb_thread_schedule()
+stopping only thread
+	note: use sleep to stop forever
+?TOPLEVEL_BINDING
+multiple values for a block parameter (%d for 1)
+wrong number of arguments (%ld for 0)
+wrong number of arguments: %s(src) or %s{..}
+block not supplied
+wrong number of arguments (%d for 0)
+%s from proc-closure
+retry from proc-closure
+block for %s#%s is useless
+instance_method
+stack level too deep
+SystemStackError
+exception reentered
+Insecure exit at level %d
+can't start a new thread (frozen ThreadGroup)
+must be called with a block
+Exception `%s' at %s:%d - %s
+undefined method `%s' for %%s%%s%%s
+undefined local variable or method `%s' for %%s%%s%%s
+protected method `%s' called for %%s%%s%%s
+private method `%s' called for %%s%%s%%s
+allocator undefined for %s
+no argument-node
+wrong number of arguments(%d for 0)
+bad argc(%d) specified for `%s(%s)'
+method `%s' called on terminated object (0x%lx)
+no method name given
+append_features
+wrong number of arguments(0 for 1)
+main#include in the wrapped load is effective only for toplevel
+Thread#join: deadlock 0x%lx - mutual join(0x%lx)
+thread 0x%lx tried to join itself
+abort_on_exception=
+abort_on_exception
+method `%s' not defined in %s
+removing `%s' may cause serious problem
+Insecure: can't remove method
+private_class_method
+public_class_method
+protected_method_defined?
+private_method_defined?
+public_method_defined?
+method_defined?
+module_function
+local_variables
+global_variables
+singleton_method_undefined
+method_undefined
+singleton_method_removed
+singleton_method_added
+uninitialized File::Stat
+characterSpecial
+wrong number of argument
+not opened for writing
+unknown command ?%c
+bcdefgGkloOprRsSuwWxXz
+couldn't find HOME environment -- expanding `%s'
+loading from unsafe file %s
+loading from non-absolute path %s
+loading from unsafe path %s
+executable_real?
+[FATAL] failed to allocate memory
+?rb_gc_mark() called for broken object
+rb_gc_mark(): unknown data type 0x%lx(0x%lx) %s
+corrupted object
+gc_sweep(): unknown data type 0x%lx(%ld)
+obj_free() called for broken object
+wrong type argument %s (should be callable)
+ObjectSpace::add_finalizer is deprecated; use define_finalizer
+ObjectSpace::remove_finalizer is deprecated; use undefine_finalizer
+ObjectSpace::finalizers is deprecated
+ObjectSpace::call_finalizer is deprecated; use define_finalizer
+copy_finalizer: descarding old finalizers
+0x%lx is not id value
+0x%lx is recycled object
+cross-thread violation on rb_gc()
+negative allocation size (or too big)
+negative re-allocation size
+failed to allocate memory
+undefine_finalizer
+define_finalizer
+remove_finalizer
+garbage_collect
+Insecure: can't modify hash
+uninitialized Hash
+rehash occurred during iteration
+Hash#%s is deprecated; use Hash#values_at
+wrong number arguments(%d for 0)
+bad environment variable name
+ENV.%s is deprecated; use ENV.values_at
+odd number args for Hash
+bad environment variable value
+cannot change environment variable
+End of file reached
+Insecure: operation on untainted IO
+uninitialized stream
+Insecure: can't close
+closing non-duplex IO for reading
+closing non-duplex IO for writing
+sysseek for buffered IO
+illegal access mode %s
+%s must have %s method, %s given
+$defout is obslete; use $stdout instead
+$deferr is obslete; use $stderr instead
+illegal prep_path() call
+%s::new() does not take block; use %s::open() instead
+Can't do inplace edit without backup
+Can't do inplace edit for stdio
+return value overflowed string
+not opened for reading
+file too big for single read
+negative length %ld given
+syswrite for buffered IO
+sysread for buffered IO
+Insecure: can't reopen
+getc is obsolete; use STDIN.getc instead
+no stream to tell
+no stream to seek
+no stream to set position
+no stream to rewind
+marshal data too short
+long too big for this architecture (size %d, given %d)
+%s does not refer class
+%s does not refer module
+dump format error(0x%x)
+class %s needs to have instance method `_load_data'
+define `allocate' instead of `_alloc'
+dump format error
+instance of %s needs to have method `marshal_load'
+class %s needs to have method `_load'
+struct %s not compatible (:%s for :%s)
+uninitialized struct
+dump format error (user class)
+singleton can't be loaded
+dump format error (unlinked)
+instance of IO needed
+incompatible marshal file format (can't be read)
+	format version %d.%d required; %d.%d given
+incompatible marshal file format (can be read)
+	format version %d.%d required; %d.%d given
+can't dump anonymous class %s
+singleton can't be dumped
+no marshal_dump is defined for class %s
+cannot dump hash with default proc
+can't dump anonymous module %s
+singleton class can't be dumped
+_dump() must return string
+exceed depth limit
+%s can't be coerced into %s
+coerce must return [x, y]
+<step cannot be 0
+float %s out of range of integer
+Atreating Symbol as an integer
+no implicit conversion from nil to integer
+integer %ld out of range of fixnum
+%ld out of char range
+failed to convert %s into Integer
+failed to convert %s into Float
+FloatDomainError
+ZeroDivisionError
+Object#id will be deprecated; use Object#object_id
+Object#type is deprecated; use Object#class
+[bug] frozen object (%s) allocated
+initialize_copy should take same class object
+default `to_a' will be obsolete
+#<%s:0x%lx ...>
+class or module required
+Insecure: can't freeze object
+compared with non class/module
+wrong instance allocation
+can't create instance of virtual class
+can't instantiate uninitialized class
+uninitialized class
+empty symbol string
+%ld is not a symbol
+do not use Fixnums as Symbols
+%s is not a symbol
+wrong constant name %s
+`%s' is not allowed as an instance variable name
+cannot convert %s into %s
+%s#%s should return %s
+%s#%s should return Integer
+Float %s out of range
+Float %*s out of range
+string for Float contains null byte
+invalid value for Float()
+cannot convert nil into Float
+no implicit conversion to float from nil
+no implicit conversion to float from string
+remove_class_variable
+class_variables
+private_instance_methods
+protected_instance_methods
+public_instance_methods
+instance_methods
+included_modules
+remove_instance_variable
+instance_variable_set
+instance_variable_get
+instance_variables
+private_methods
+protected_methods
+singleton_methods
+0123456789abcdef0123456789ABCDEFx
+too few arguments
+pack(U): value out of range
+redundant UTF-8 sequence
+malformed UTF-8 character (expected %d bytes, given %d bytes)
+malformed UTF-8 character
+'%c' allowed only after types %s
+cannot compress negative numbers
+too short buffer for P(%ld for %ld)
+%% is not supported
+X outside of string
+non associated pointer
+no associated pointer
+x outside of string
+@ outside of string
+opt_f_block_arg
+xstring_contents
+string_contents
+cmd_brace_block
+tSTRING_CONTENT
+ !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdeftw
+	3	4	8	A	B	H	N	O	P	S	T	U	V	Y	Z	[	^	_	b	c	f	g	j	k	l	o	p	s	t	w	
+Reducing stack by rule %d (line %u), 
+Invalid escape character syntax
+unknown regexp option%s - %s
+symbol cannot contain '\0'
+ambiguous first argument; put parentheses or even spaces
+statement not reached
+unused literal ignored
+Can't set variable $%d
+Can't set variable $%c
+multiple assignment in conditional
+found = in conditional, should be ==
+block argument should not be given
+unterminated string meets end of file
+unterminated here document identifier
+can't find string "%s" anywhere before EOF
+embedded document meets end of file
+multibyte character literal not supported yet; use ?\%.3o
+invalid character syntax; use ?\%c
+incomplete character syntax
+`@@%c' is not allowed as a class variable name
+trailing `%c' in number
+Illegal octal digit
+no .<digit> floating literal anymore; put 0 before dot
+unterminated quoted string meets end of file
+unknown type of %string
+don't put space before argument parentheses
+numeric literal without digits
+`&' interpreted as argument prefix
+`*' interpreted as argument prefix
+Invalid char `\%03o' in expression
+`@%c' is not allowed as an instance variable name
+identifier %s is not valid
+void value expression
+useless use of %s in void context
+dynamic constant assignment
+Can't assign to __LINE__
+Can't assign to __FILE__
+Can't assign to false
+Can't assign to true
+Can't assign to nil
+Can't change the value of self
+integer literal in conditional range
+range literal in condition
+string literal in condition
+literal in condition
+regex literal in condition
+parser stack overflow
+can't define singleton method for literals
+can't define singleton method for ().
+block argument must be local variable
+duplicate block argument name
+rest argument must be local variable
+duplicate rest argument name
+duplicate optional argument name
+formal argument must be local variable
+duplicate argument name
+formal argument cannot be a class variable
+formal argument cannot be a global variable
+formal argument cannot be an instance variable
+formal argument cannot be a constant
+empty symbol literal
+module definition in method body
+class definition in method body
+(...) interpreted as grouped expression
+parenthesize argument for future version
+parenthesize argument(s) for future version
+constant re-assignment
+class/module name must be CONSTANT
+both block arg and actual block given
+END in method; use at_exit
+BEGIN in method
+can't make alias for the number variables
+else without rescue is useless
+Shifting error token, 
+Error: discarding
+Shifting token %s, 
+Now at end of input.
+Reading a token: 
+Entering state %d
+Stack size increased to %lu
+undefined conversion from %s into %s
+,signaled(SIG%s=%d)
+,stopped(SIG%s=%d)
+Insecure PATH - %s
+wrong first argument
+can't handle UID during evaluating the block given to the Process::UID.switch method
+can't handle GID during evaluating the block given to the Process::UID.switch method
+re_exchangeable?
+grant_privilege
+change_privilege
+bad value for range
+`initialize' called twice
+cannot iterate from %s
+step can't be 0
+step can't be negative
+%ld..%s%ld out of range
+ !"#$%&'()*+,-./0123456789:;<=>?@abcdefghijklmnopqrstuvwxyz[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+uninitialized Regexp
+unknown kcode - should not happen
+index %d out of matches
+Stack overflow in regexp matcher
+flags%s ignored
+wrong argument type
+modifying %s is deprecated
+mixed kcode: %s and %s
+ONIGURUMA_VERSION_MAJOR.ONIGURUMA_VERSION_MINOR.ONIGURUMA_VERSION_TEENY
+undefined error code
+can't convert to wide-char on specified multibyte-encoding
+default multibyte-encoding is not setted
+unexpected bytecode (bug)
+undefined bytecode (bug)
+stack error (bug)
+internal parser error (bug)
+undefined type (bug)
+match-stack limit over
+fail to memory allocation
+no support in this configuration
+invalid argument
+over thread pass limit count
+group number is too big for capture history
+never ending recursion
+multiplex definition name <%n> call
+multiplex defined name <%n>
+undefined group <%n> reference
+undefined name <%n> reference
+invalid char in group name <%n>
+invalid group name <%n>
+group name is empty
+invalid wide-char value
+too long wide-char value
+too big wide-char value
+numbered backref/call is not allowed. (use name)
+invalid backref number/name
+too big backref number
+too short multibyte code string
+too many multibyte code ranges are specified
+mismatch multibyte code length in char-class range
+empty range in char class
+upper is smaller than lower in repeat range
+too big number for repeat range
+invalid repeat range {lower,upper}
+invalid pattern in look-behind
+invalid POSIX bracket type
+undefined group option
+end pattern in group
+end pattern with unmatched parenthesis
+unmatched close parenthesis
+nested repeat operator
+target of repeat operator is invalid
+target of repeat operator is not specified
+unmatched range specifier in char-class
+char-class value at start of range
+char-class value at end of range
+illegal control-code syntax
+illegal meta-code syntax
+end pattern at control
+end pattern at meta
+end pattern at backslash
+premature end of char-class
+empty char-class
+end pattern at left bracket
+end pattern at left brace
+character class has '%s' without escape
+regular expression has '%s' without escape
+redundant nested repeat operator
+--version       print the version
+--copyright     print the copyright
+-x[directory]   strip off text before #!ruby line and perhaps cd to directory
+-W[level]       set warning level; 0=silence, 1=medium, 2=verbose (default)
+-w              turn warnings on for your script
+-v              print version number, then turn on verbose mode
+-T[level]       turn on tainting checks
+-S              look for the script using PATH environment variable
+-s              enable some switch parsing for switches after script name
+-rlibrary       require the library, before executing your script
+-p              assume loop like -n but print line also like sed
+-n              assume 'while gets(); ... end' loop around your script
+-l              enable line ending processing
+-Kkcode         specifies KANJI (Japanese) code-set
+-Idirectory     specify $LOAD_PATH directory (may be used more than once)
+-i[extension]   edit ARGV files in place (make backup if extension supplied)
+-Fpattern       split() pattern for autosplit (-a)
+-e 'command'    one line of script. Several -e's allowed. Omit [programfile]
+-d              set debugging flags (set $DEBUG to true)
+-Cdirectory     cd to directory, before executing your script
+-c              check syntax only
+-a              autosplit mode with -n or -p (splits $_ into $F)
+-0[octal]       specify record separator (\0, if no argument)
+Usage: %s [switches] [--] [programfile] [arguments]
+malformed RUBYLIB_PREFIX
+/lib/ruby/1.8/i386-mswin32
+/lib/ruby/site_ruby
+/lib/ruby/site_ruby/1.8/i386-msvcrt
+/lib/ruby/site_ruby/1.8
+$0 not initialized
+No %s allowed in tainted mode
+No %s allowed while running setgid
+No %s allowed while running setuid
+No Ruby script found in input
+program input from stdin
+Illegal switch in RUBYOPT: -%c
+%s: invalid option -%c  (-h will show valid options)
+%s: invalid option --%s  (-h will show valid options)
+%s: no code specified for -e
+Can't chdir to %s
+unsupported name `SIG%s'
+bad signal type %s
+wrong number of arguments -- kill(sig, pid...)
+trap_handler: Bad signal %d
+Segmentation fault
+invalid signal number (%d)
+unsupported signal SIG%s
+wrong number of arguments -- trap(sig, cmd)/trap(sig){...}
+Insecure: tainted signal trap
+malformed format string
+malformed format string - %%%c
+illegal format character - %%
+precision given twice
+unnumbered(%d) mixed with numbered
+width given twice
+invalid index - %d$
+numbered(%d) after unnumbered(%d)
+value given twice - %d$
+negative number for %%u specifier
+malformed format string - %%.[0-9]
+malformed format string - %%*[0-9]
+malformed format string - %%[0-9]
+too few argument.
+negative string size (or size too big)
+NULL pointer given
+Insecure: can't modify string
+string contains null byte
+type mismatch: %s given
+string =~ string will be obsolete; use explicit regexp
+~string will be obsolete; use explicit regexp
+index %ld out of string
+negative length %ld
+regexp group %d not matched
+index %d out of regexp
+regexp not matched
+string not matched
+wrong number of arguments(%d for 2)
+$_ value need to be String (%s given)
+string modified
+salt too short(need >=2 bytes)
+interning empty string
+symbol string may not contain `\0'
+value of %s must be String
+%s is not struct member
+Insecure: can't modify Struct
+`%s' is not a struct member
+struct size differs
+non-initialized struct
+#<struct %s:...>
+no member '%s' in struct
+offset %ld too large for struct(size:%ld)
+offset %ld too small for struct(size:%ld)
+inconsistent struct
+identifier %s needs to be constant
+Insecure: can't modify Time
+time must be positive
+out of Time range
+%f out of Time range
+%s must be positive
+argument out of range
+2 or 3 digits year is used
+2 digits year is used
+time out of range
+gmtime/localtime error
+localtime error
+%a %b %d %H:%M:%S %Z %Y
+%a %b %d %H:%M:%S UTC %Y
+time + %f out of Time range
+time - %f out of Time range
+strftime called with empty format string
+obsolete method Time::times; use Process::times
+too big year to marshal
+marshaled time format differ
+Cannot do inplace edit on long filename (%ld characters)
+__tmp_classpath__
+class path is not set properly
+global variable `%s' not initialized
+%s is a read-only variable
+undefined global variable %s
+Insecure: can't change global variable value
+instance variable %s not initialized
+Insecure: can't modify instance variable
+instance variable %s not defined
+wrong autoload table: %s
+empty file name
+already initialized %s %s
+Insecure: can't set %s
+rb_define_const: invalide name `%s' for constant
+uninitialized constant %s
+uninitialized constant %s::%s
+autoload must be constant name
+toplevel constant %s referenced by %s::%s
+constant %s::%s not defined
+cannot remove %s::%s
+Insecure: can't remove constant
+`%s' is not allowed as a constant name
+class variable %s of %s is overridden by %s
+already initialized class variable %s
+Insecure: can't modify class variable
+uninitialized class variable %s in %s
+wrong class variable name %s
+class variable %s not defined for %s
+cannot remove %s for %s
+Insecure: can't remove class variable
+%s does not refer class/module
+undefined class/module %.*s
+can't retrieve anonymous class %s
+Insecure: tainted variable trace
+can't alias in tracer
+Insecure: can't alias global variable
+RUBY_RELEASE_DATE
+ruby %s (%s) [%s]
+ruby - Copyright (C) 1993-2003 Yukihiro Matsumoto
+Unable to create interrupt event!
+could not find version 1 of winsock dll
+Unable to locate winsock library!
+CreateHardLinkA
+failed to launch waiter thread:%d
+opendir: malloc failed!
+too many parameters: %d
+GetProcAddress: %s or %s
+LoadLibrary: %s
+Wrong number of parameters: expected %d, got %d.
+unknown zlib error %d: %s
+attempt to close unfinished zstream; reset forced.
+attempt to close uninitialized zstream; ignored.
+stream is not ready
+deflateParams() returned Z_BUF_ERROR
+unexpected end of file
+unknown flags 0x%02x
+encrypted gzip file is not supported
+multi-part gzip file is not supported
+unsupported compression method %d
+not in gzip format
+invalid compressed data -- length error
+invalid compressed data -- crc error
+footer is not found
+gzip footer is not written; broken gzip file
+Zlib::GzipWriter object must be closed explicitly.
+closed gzip stream
+wrong number of arguments (0 for 1)
+header is already written
+negative length %d given
+DEFAULT_STRATEGY
+DEFAULT_COMPRESSION
+BEST_COMPRESSION
+need dictionary
+incorrect data check
+incorrect header check
+invalid window size
+unknown compression method
+ deflate 1.1.4 Copyright 1995-2002 Jean-loup Gailly 
+incompatible version
+insufficient memory
+invalid bit length repeat
+too many length or distance symbols
+invalid stored block lengths
+invalid block type
+invalid literal/length code
+invalid distance code
+ inflate 1.1.4 Copyright 1995-2002 Mark Adler 
+incomplete dynamic bit lengths tree
+oversubscribed dynamic bit lengths tree
+incomplete literal/length tree
+oversubscribed literal/length tree
+empty distance tree with lengths
+incomplete distance tree
+oversubscribed distance tree
+Application transferred too many scanlines
+Invalid SOS parameters for sequential JPEG
+Corrupt JPEG data: found marker 0x%02x instead of RST%d
+Premature end of JPEG file
+Warning: unknown JFIF revision number %d.%02d
+Corrupt JPEG data: bad Huffman code
+Corrupt JPEG data: premature end of data segment
+Corrupt JPEG data: %u extraneous bytes before marker 0x%02x
+Inconsistent progression sequence for component %d coefficient %d
+Unknown Adobe color transform code %d
+Obtained XMS handle %u
+Freed XMS handle %u
+Unrecognized component IDs %d %d %d, assuming YCbCr
+JFIF extension marker: RGB thumbnail image, length %u
+JFIF extension marker: palette thumbnail image, length %u
+JFIF extension marker: JPEG-compressed thumbnail image, length %u
+Opened temporary file %s
+Closed temporary file %s
+  Ss=%d, Se=%d, Ah=%d, Al=%d
+    Component %d: dc=%d ac=%d
+Start Of Scan: %d components
+    Component %d: %dhx%dv q=%d
+Start Of Frame 0x%02x: width=%u, height=%u, components=%d
+Smoothing not supported with nonstandard sampling ratios
+At marker 0x%02x, recovery action %d
+Selected %d colors for quantization
+Quantizing to %d colors
+Quantizing to %d = %d*%d*%d colors
+        %4u %4u %4u %4u %4u %4u %4u %4u
+Unexpected marker 0x%02x
+Miscellaneous marker 0x%02x, length %u
+    with %d x %d thumbnail image
+JFIF extension marker: type 0x%02x, length %u
+Warning: thumbnail image size does not match data length %u
+JFIF APP0 marker: version %d.%02d, density %dx%d  %d
+        %3d %3d %3d %3d %3d %3d %3d %3d
+Obtained EMS handle %u
+Freed EMS handle %u
+Define Restart Interval %u
+Define Quantization Table %d  precision %d
+Define Huffman Table 0x%02x
+Define Arithmetic Table 0x%02x: 0x%02x
+Unknown APP14 marker (not Adobe), length %u
+Unknown APP0 marker (not JFIF), length %u
+Adobe APP14 marker: version %d, flags 0x%04x 0x%04x, transform %d
+Caution: quantization tables are too coarse for baseline JPEG
+6b  27-Mar-1998
+Copyright (C) 1998, Thomas G. Lane
+Write to XMS failed
+Read from XMS failed
+Image too wide for this implementation
+Virtual array controller messed up
+Unsupported marker type 0x%02x
+Application transferred too few scanlines
+Write failed on temporary file --- out of disk space?
+Seek failed on temporary file
+Read failed on temporary file
+Failed to create temporary file %s
+Invalid JPEG file structure: SOS before SOF
+Invalid JPEG file structure: two SOI markers
+Unsupported JPEG process: SOF type 0x%02x
+Invalid JPEG file structure: missing SOS marker
+Invalid JPEG file structure: two SOF markers
+Cannot quantize to more than %d colors
+Cannot quantize to fewer than %d colors
+Cannot quantize more than %d color components
+Insufficient memory (case %d)
+Not a JPEG file: starts with 0x%02x 0x%02x
+Quantization table 0x%02x was not defined
+JPEG datastream contains no image
+Huffman table 0x%02x was not defined
+Backing store not supported
+Requested feature was omitted at compile time
+Not implemented yet
+Invalid color quantization mode change
+Scan script does not transmit all data
+Cannot transcode due to multiple use of quantization table %d
+Premature end of input file
+Empty input file
+Maximum supported image dimension is %u pixels
+Missing Huffman code table entry
+Huffman code size table overflow
+Fractional sampling not implemented yet
+Output file write error --- out of disk space?
+Input file read error
+Didn't expect more than one scan
+Write to EMS failed
+Read from EMS failed
+Empty JPEG image (DNL not supported)
+Bogus DQT index %d
+Bogus DHT index %d
+Bogus DAC value 0x%x
+Bogus DAC index %d
+Unsupported color conversion request
+Too many color components: %d, max %d
+CCIR601 sampling not implemented yet
+Suspension not allowed here
+Buffer passed to JPEG library is too small
+Bogus virtual array access
+JPEG parameter struct mismatch: library thinks size is %u, caller expects %u
+Improper call to JPEG library in state %d
+Invalid scan script at entry %d
+Bogus sampling factors
+Invalid progressive parameters at scan script entry %d
+Invalid progressive parameters Ss=%d Se=%d Ah=%d Al=%d
+Unsupported JPEG data precision %d
+Invalid memory pool code %d
+Sampling factors too large for interleaved scan
+Wrong JPEG library version: library is %d, caller expects %d
+Bogus marker length
+Bogus JPEG colorspace
+Bogus input colorspace
+Bogus Huffman table definition
+IDCT output block size %d not supported
+DCT coefficient out of range
+Invalid component ID %d in SOS
+Bogus buffer control mode
+MAX_ALLOC_CHUNK is wrong, please fix
+ALIGN_TYPE is wrong, please fix
+Sorry, there are legal restrictions on arithmetic coding
+Bogus message code %d
+Unknown zlib error
+zlib version error
+zlib memory error
+Incompatible libpng version in application and library
+Application  is  running with png.c from libpng-%.20s
+Application was compiled with png.h from libpng-%.20s
+Missing PLTE before IDAT
+Missing IHDR before IDAT
+Invalid chunk length.
+PNG file corrupted by ASCII conversion
+Extra compressed data
+Decompression error
+Not enough image data
+Invalid attempt to read row data
+Too many IDAT's found
+@png_do_dither returned rowbytes=0
+png_do_rgb_to_gray found nongray pixel
+NULL row buffer for row %ld, pass %d
+Width too large for libpng to process image data.
+Invalid image height
+Invalid image width
+Invalid color type
+Invalid bit depth
+Call to NULL read function
+same structure.  Resetting write_data_fn to NULL.
+It's an error to set both read_data_fn and write_data_fn in the 
+CNxFile Object:
+0123456789ABCDEFlibpng error: %s
+libpng error: %s, offset=%d
+libpng error no. %s: %s
+libpng warning: %s
+libpng warning no. %s: %s
+Unknown zTXt compression type %d
+Not enough memory for text.
+Incomplete compressed datastream in %s chunk
+Data error in compressed datastream in %s chunk
+Buffer error in compressed datastream in %s chunk
+Not enough memory to decompress chunk
+Not enough memory to decompress chunk..
+Not enough memory to decompress chunk.
+invalid chunk type
+Ignoring bad adaptive filter type
+Invalid IHDR chunk
+Out of place IHDR
+Truncating incorrect info tRNS chunk length
+Truncating incorrect tRNS chunk length
+Invalid palette chunk
+Ignoring PLTE chunk in grayscale PNG
+Duplicate PLTE chunk
+Invalid PLTE after IDAT
+Missing IHDR before PLTE
+Incorrect IEND chunk length
+No image in file
+gamma = (%d/100000)
+Ignoring incorrect gAMA value when sRGB is also present
+Ignoring gAMA chunk with gamma=0
+Duplicate gAMA chunk
+Out of place gAMA chunk
+Invalid gAMA after IDAT
+Incorrect gAMA chunk length
+Missing IHDR before gAMA
+Duplicate sBIT chunk
+Out of place sBIT chunk
+Invalid sBIT after IDAT
+Incorrect sBIT chunk length
+Missing IHDR before sBIT
+Invalid cHRM white point
+Invalid cHRM red point
+Invalid cHRM green point
+Invalid cHRM blue point
+gx=%f, gy=%f, bx=%f, by=%f
+wx=%f, wy=%f, rx=%f, ry=%f
+Ignoring incorrect cHRM value when sRGB is also present
+Duplicate cHRM chunk
+Missing PLTE before cHRM
+Invalid cHRM after IDAT
+Incorrect cHRM chunk length
+Missing IHDR before cHRM
+incorrect gamma=(%d/100000)
+Unknown sRGB intent
+Duplicate sRGB chunk
+Out of place sRGB chunk
+Invalid sRGB after IDAT
+Incorrect sRGB chunk length
+Missing IHDR before sRGB
+Profile size field missing from iCCP chunk
+Ignoring truncated iCCP profile.
+Ignoring nonzero compression type in iCCP chunk
+Malformed iCCP chunk
+Duplicate iCCP chunk
+Out of place iCCP chunk
+Invalid iCCP after IDAT
+Missing IHDR before iCCP
+sPLT chunk has bad length
+malformed sPLT chunk
+Invalid sPLT after IDAT
+Missing IHDR before sPLT
+tRNS chunk not allowed with alpha channel
+Incorrect tRNS chunk length
+Duplicate tRNS chunk
+Invalid tRNS after IDAT
+Zero length tRNS chunk
+Missing PLTE before tRNS
+Missing IHDR before tRNS
+Incorrect bKGD chunk index value
+Incorrect bKGD chunk length
+Duplicate bKGD chunk
+Missing PLTE before bKGD
+Invalid bKGD after IDAT
+Missing IHDR before bKGD
+Duplicate hIST chunk
+Missing PLTE before hIST
+Invalid hIST after IDAT
+Incorrect hIST chunk length
+Missing IHDR before hIST
+Duplicate pHYs chunk
+Invalid pHYs after IDAT
+Incorrect pHYs chunk length
+Missing IHDR before pHYs
+Duplicate oFFs chunk
+Invalid oFFs after IDAT
+Incorrect oFFs chunk length
+Missing IHDR before oFFs
+No memory for pCAL params.
+Unrecognized equation type for pCAL chunk
+Invalid pCAL parameters for equation type
+Invalid pCAL data
+Duplicate pCAL chunk
+Invalid pCAL after IDAT
+No memory for pCAL purpose.
+Missing IHDR before pCAL
+Invalid sCAL data
+malformed height string in sCAL chunk
+malformed width string in sCAL chunk
+Duplicate sCAL chunk
+Invalid sCAL after IDAT
+Out of memory while processing sCAL chunk
+Missing IHDR before sCAL
+Duplicate tIME chunk
+Incorrect tIME chunk length
+Out of place tIME chunk
+Insufficient memory to process text chunk.
+Not enough memory to process text chunk.
+No memory to process text chunk.
+Missing IHDR before tEXt
+Insufficient memory to store zTXt chunk.
+Not enough memory to process zTXt chunk.
+Unknown compression type in zTXt chunk
+Zero length zTXt chunk
+Out of memory processing zTXt chunk.
+Missing IHDR before zTXt
+unknown critical chunk
+Extra compression data
+Extra compressed data.
+Decompression Error
+?Ignoring attempt to set negative chromaticity value
+Ignoring attempt to set chromaticity value exceeding 21474.83
+@Setting gamma=0
+Limiting gamma to 21474.83
+Setting negative gamma to zero
+Insufficient memory for hIST chunk data.
+Palette size 0, hIST allocation skipped.
+Width too large to process image data; rowbytes will overflow.
+Invalid filter method in IHDR
+Unknown filter method in IHDR
+MNG features are not allowed in a PNG datastream
+Unknown compression method in IHDR
+Unknown interlace method in IHDR
+Invalid color type/bit depth combination in IHDR
+Invalid color type in IHDR
+Invalid bit depth in IHDR
+Invalid image size in IHDR
+Image width or height is zero in IHDR
+Insufficient memory for pCAL parameter.
+Insufficient memory for pCAL params.
+Insufficient memory for pCAL units.
+Insufficient memory for pCAL purpose.
+Unable to malloc palette
+?iTXt chunk not supported.
+No memory for sPLT palettes.
+Out of memory while processing unknown chunk.
+string too long
+invalid string position
+Unknown exception
+dddd, MMMM dd, yyyy
+Visual C++ CRT: Not enough memory to complete call to strerror.
+Illegal byte sequence
+Directory not empty
+Function not implemented
+No locks available
+Filename too long
+Resource deadlock avoided
+Result too large
+Read-only file system
+No space left on device
+Inappropriate I/O control operation
+Too many open files
+Too many open files in system
+Invalid argument
+Not a directory
+Resource device
+Permission denied
+Not enough space
+Resource temporarily unavailable
+No child processes
+Bad file descriptor
+Exec format error
+Arg list too long
+No such device or address
+Input/output error
+Interrupted function call
+No such process
+No such file or directory
+Operation not permitted
+GAIsProcessorFeaturePresent
+ !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+An application has made an attempt to load the C runtime library incorrectly.
+Please contact the application's support team for more information.
+- Attempt to use MSIL code from this assembly during native code initialization
+This indicates a bug in your application. It is most likely the result of calling an MSIL-compiled (/clr) function from a native constructor or from DllMain.
+- not enough space for locale information
+- Attempt to initialize the CRT more than once.
+This indicates a bug in your application.
+- CRT not initialized
+- unable to initialize heap
+- not enough space for lowio initialization
+- not enough space for stdio initialization
+- pure virtual function call
+- not enough space for _onexit/atexit table
+- unable to open console device
+- unexpected heap error
+- unexpected multithread lock error
+- not enough space for thread data
+This application has requested the Runtime to terminate it in an unusual way.
+Please contact the application's support team for more information.
+- not enough space for environment
+- not enough space for arguments
+- floating point support not loaded
+Microsoft Visual C++ Runtime Library
+<program name unknown>
+InitializeCriticalSectionAndSpinCount
+SunMonTueWedThuFriSat
+JanFebMarAprMayJunJulAugSepOctNovDec
+ Complete Object Locator'
+ Class Hierarchy Descriptor'
+ Base Class Array'
+ Base Class Descriptor at (
+ Type Descriptor'
+`local static thread guard'
+`managed vector copy constructor iterator'
+`vector vbase copy constructor iterator'
+`vector copy constructor iterator'
+`dynamic atexit destructor for '
+`dynamic initializer for '
+`eh vector vbase copy constructor iterator'
+`eh vector copy constructor iterator'
+`managed vector destructor iterator'
+`managed vector constructor iterator'
+`placement delete[] closure'
+`placement delete closure'
+`local vftable constructor closure'
+`local vftable'
+`udt returning'
+`copy constructor closure'
+`eh vector vbase constructor iterator'
+`eh vector destructor iterator'
+`eh vector constructor iterator'
+`virtual displacement map'
+`vector vbase constructor iterator'
+`vector destructor iterator'
+`vector constructor iterator'
+`scalar deleting destructor'
+`default constructor closure'
+`vector deleting destructor'
+`vbase destructor'
+`local static guard'
+ !"#$%&'()*+,-./0123456789:;<=>?@abcdefghijklmnopqrstuvwxyz[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+ !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`ABCDEFGHIJKLMNOPQRSTUVWXYZ{|}~
+GetProcessWindowStation
+GetUserObjectInformationA
+GetLastActivePopup
+GetActiveWindow
+Let life be beautiful like summer flowers and death like autumn leaves
+2007.06.29 14:00
+.?AVCGameProperty@@
+.?AVCGameFrame@@
+.?AVbad_alloc@std@@
+.?AVexception@std@@
+.?AVlogic_error@std@@
+.?AVlength_error@std@@
+.?AVCMidiChecker@@
+.?AVCRxAudioSegment@@
+.?AVCRxFontList@@
+.?AVCRxMemoryFile@@
+.?AVCNxSurfaceSprite@@
+.?AVCNxSprite@@
+.?AVCRxScreen@@
+.?AVCNxScreen@@
+.?AVCNxWindow@@
+.?AVCNxTrackingSprite@@
+.?AVCRxSprite@@
+.?AVCRxSurface@@
+.?AVCNxSurface@@
+.?AVCRxTilemap@@
+.?AVCRxTilemapSprite@@
+.?AVCRxViewport@@
+.?AVCRxWindow@@
+!"#$%&'()*+,-./0123456789:;<=>?@
+(3-!0,1'8"5.*2$
+0123456789ABCDEF
+`!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/
+888888888888888888888888888888888888888888888888888888888888888
+8888888888888888
+	88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888/u
+0123456789abcdef0123456789ABCDEF
+.?AVCNxCustomDraw32@NxDrawLocal@@
+.?AVCNxCustomDraw@NxDrawLocal@@
+.?AVCNxDynamicDraw8@NxDrawLocal@@
+.?AVCNxDynamicDraw@NxDrawLocal@@
+.?AVCNxCustomDraw8@NxDrawLocal@@
+.?AVCNxTrackingUpdateRegion@CNxTrackingSprite@@
+.?AVCNxUpdateRegion@NxDrawLocal@@
+.?AVCNxDIBImage@@
+.?AVCNxDynamicDraw32@NxDrawLocal@@
+.?AVCNxImageLoader@NxDrawLocal@@
+.?AVCNxJPEGImageLoader@@
+.?AVCNxDIBImageLoader@@
+.?AVCNxPNGImageLoader@@
+.?AVCNxBMPImageLoader@@
+Error decoding compressed text
+.?AVout_of_range@std@@
+.?AVtype_info@@
+.?AVbad_exception@std@@
+                          
+abcdefghijklmnopqrstuvwxyz
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+                          
+abcdefghijklmnopqrstuvwxyz
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+GetCurrentThreadId
+InterlockedExchange
+SetEnvironmentVariableA
+GetModuleFileNameA
+InterlockedIncrement
+DuplicateHandle
+GetExitCodeProcess
+GetModuleHandleA
+GetEnvironmentVariableA
+GetProcessTimes
+WaitForMultipleObjectsEx
+InterlockedDecrement
+WaitForSingleObject
+SetThreadContext
+GetThreadContext
+GetExitCodeThread
+TerminateThread
+FreeEnvironmentStringsA
+GetEnvironmentStrings
+SystemTimeToFileTime
+GetCommandLineA
+GenerateConsoleCtrlEvent
+TerminateProcess
+GetCurrentProcessId
+SetFileAttributesA
+GetLogicalDrives
+CreateDirectoryA
+InitializeCriticalSection
+DeleteCriticalSection
+GetPrivateProfileStringA
+GetSystemDirectoryA
+GetFileAttributesA
+GetConsoleOutputCP
+GetEnvironmentStringsW
+FreeEnvironmentStringsW
+SetCurrentDirectoryA
+GetCurrentDirectoryA
+GetFullPathNameA
+GetTimeZoneInformation
+IsValidCodePage
+SetThreadExecutionState
+EnterCriticalSection
+LeaveCriticalSection
+GetCurrentProcess
+GetPriorityClass
+GetCurrentThread
+GetThreadPriority
+SetPriorityClass
+SetThreadPriority
+WideCharToMultiByte
+MultiByteToWideChar
+QueryPerformanceCounter
+GetStartupInfoA
+RemoveDirectoryA
+SetConsoleCtrlHandler
+GetSystemTimeAsFileTime
+FlushFileBuffers
+GetFileInformationByHandle
+FileTimeToLocalFileTime
+FileTimeToSystemTime
+IsDebuggerPresent
+SetUnhandledExceptionFilter
+UnhandledExceptionFilter
+RegCreateKeyExA
+RegQueryValueExA
+GetGlyphOutlineW
+GetGlyphOutline
+EnumFontFamiliesExA
+CreateCompatibleDC
+CreateFontIndirectA
+GetTextMetricsA
+CreateDIBSection
+acmStreamPrepareHeader
+acmStreamConvert
+acmStreamUnprepareHeader
+acmFormatSuggest
+CoCreateInstance
+CallWindowProcA
+GetWindowPlacement
+GetForegroundWindow
+TranslateAccelerator
+TranslateMessage
+DispatchMessageA
+ChangeDisplaySettingsA
+AdjustWindowRectEx
+MsgWaitForMultipleObjects
+GetActiveWindow
+PostQuitMessage
+GetMenuItemCount
+LoadAcceleratorsA
+GetAsyncKeyState
+IsWindowVisible
+SendDlgItemMessageA
+mmioCreateChunk
+timeBeginPeriod
+WSAGetLastError
+;@@@N/%(0030Y'-5.-3-3-3-3-0_R8'(5#0003-000>200>h*
+,F'003000-0300-3-e;=0##
+{{{{ !"#$%&'()*
+{{{{./0110/$23)
+4{{789:;;:<0=2(>?@ABCDEFFGDH0$'
+Z@[\]XS^YSMF;1#
+{{{aLRSSRLE:0bc{{{{gWLXXLKD9/!h{{{{lga]WEDCmn {{{{{{{{\VsJBt{{{{{{{{{{[w{xy{{{{{{
+HIJKLMNOPOQRS;TUVWXYZ[\
+_RP`abccdceefPR;ghijklm
+pfcdqrrrsrtqdcfQSu)vjYD
+wxtsyz{{{{|ystdeOSu)i}
+FGGH;IJKKJL::.%M>
+XYZZZ[[[[HHGG;:.\]
+efGGghijYkllmlmlll[[HHG:nopqbr**sMP
+TH[[luvwxmyzyyyzzzllZZHHGLT{|56*}aO
+~~~zymlZ[HG;:%%$6*`
+~yzmlZ[G;:.%5r_
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+EncDefaultCharEncoding
+RGSSAudioFinalize
+RGSSAudioInitialize
+RGSSClearRTPPath
+RGSSErrorMessage
+RGSSGetPathWithRTP
+RGSSGetStringACP
+RGSSGetStringUTF8
+RGSSSetStringACP
+RGSSSetStringUTF8
+RegDefaultSyntax
+RegEncodingASCII
+RegEncodingEUC_JP
+RegEncodingSJIS
+RegEncodingUTF8
+enc_get_left_adjust_char_head
+enc_get_prev_char_head
+enc_get_right_adjust_char_head
+re_alloc_pattern
+regex_error_code_to_str
+regex_foreach_name
+regex_get_encoding
+regex_get_options
+regex_get_syntax
+regex_name_to_backref_number
+regex_name_to_group_numbers
+regex_number_of_names
+regex_recompile
+regex_region_clear
+regex_region_copy
+regex_region_free
+regex_region_new
+regex_region_resize
+regex_set_verb_warn_func
+regex_set_warn_func
+ruby_re_adjust_startpos
+ruby_re_compile_pattern
+ruby_re_free_pattern
+ruby_re_free_registers
+ruby_re_mbcinit
+ruby_re_recompile_pattern
+ruby_re_set_casetable
+RegCreateKeyExA
+RegQueryValueExA
+GetGlyphOutlineW
+GetGlyphOutline
+EnumFontFamiliesExA
+CreateCompatibleDC
+CreateFontIndirectA
+GetTextMetricsA
+CreateDIBSection
+GetCurrentThreadId
+InterlockedExchange
+SetEnvironmentVariableA
+GetModuleFileNameA
+InterlockedIncrement
+DuplicateHandle
+GetExitCodeProcess
+GetModuleHandleA
+GetEnvironmentVariableA
+GetProcessTimes
+WaitForMultipleObjectsEx
+InterlockedDecrement
+WaitForSingleObject
+SetThreadContext
+GetThreadContext
+GetExitCodeThread
+TerminateThread
+FreeEnvironmentStringsA
+GetEnvironmentStrings
+SystemTimeToFileTime
+GetCommandLineA
+GenerateConsoleCtrlEvent
+TerminateProcess
+GetCurrentProcessId
+SetFileAttributesA
+GetLogicalDrives
+CreateDirectoryA
+InitializeCriticalSection
+DeleteCriticalSection
+GetPrivateProfileStringA
+GetSystemDirectoryA
+GetFileAttributesA
+GetConsoleOutputCP
+GetEnvironmentStringsW
+FreeEnvironmentStringsW
+SetCurrentDirectoryA
+GetCurrentDirectoryA
+GetFullPathNameA
+GetTimeZoneInformation
+IsValidCodePage
+SetThreadExecutionState
+EnterCriticalSection
+LeaveCriticalSection
+GetCurrentProcess
+GetPriorityClass
+GetCurrentThread
+GetThreadPriority
+SetPriorityClass
+SetThreadPriority
+WideCharToMultiByte
+MultiByteToWideChar
+QueryPerformanceCounter
+GetStartupInfoA
+RemoveDirectoryA
+SetConsoleCtrlHandler
+GetSystemTimeAsFileTime
+FlushFileBuffers
+GetFileInformationByHandle
+FileTimeToLocalFileTime
+FileTimeToSystemTime
+IsDebuggerPresent
+SetUnhandledExceptionFilter
+UnhandledExceptionFilter
+acmStreamPrepareHeader
+acmStreamConvert
+acmStreamUnprepareHeader
+acmFormatSuggest
+CallWindowProcA
+GetWindowPlacement
+GetForegroundWindow
+TranslateAcceleratorA
+TranslateMessage
+DispatchMessageA
+ChangeDisplaySettingsA
+AdjustWindowRectEx
+MsgWaitForMultipleObjects
+GetActiveWindow
+PostQuitMessage
+GetMenuItemCount
+LoadAcceleratorsA
+GetAsyncKeyState
+IsWindowVisible
+SendDlgItemMessageA
+mmioCreateChunk
+timeBeginPeriod
+WSAGetLastError
+CoCreateInstance
+!This program cannot be run in DOS mode.
+6uXwX&XwX&XwX&]{W&MwX&]{
+&]wX&XwY&9wX&]{8&[wX&
+-./h23456789:;<=>?@ABCKA
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+<assemblyIdentity
+    version="1.0.0.0"
+    processorArchitecture="X86"
+    name="Enterbrain.RGSS.Game"
+    type="win32"
+<description>RGSS Player</description>
+    <dependentAssembly>
+        <assemblyIdentity
+            type="win32"
+            name="Microsoft.Windows.Common-Controls"
+            version="6.0.0.0"
+            processorArchitecture="X86"
+            publicKeyToken="6595b64144ccf1df"
+            language="*"
+    </dependentAssembly>
+Library=d3rpg.dll
+Scripts=Unknown
+!This program cannot be run in DOS mode.
+222248XT2222PL\DS312@HjP
+vfepywFIsHb8G8kNdu49J3k0
+\d3rpg\$cret_dll
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<assembly xmlns='urn:schemas-microsoft-com:asm.v1' manifestVersion='1.0'>
+api-ms-win-crt-runtime-l1-1-0.dll
+VCRUNTIME140.dll
